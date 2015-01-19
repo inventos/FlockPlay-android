@@ -1,7 +1,6 @@
 FlockPlay Android
 =========
 
-- [License](#license)
 - [Description of the technology](#description-of-the-technology)
 - [Requirements](#requirements)
 - [Video player connection](#version-of-the-compiler)
@@ -11,9 +10,6 @@ FlockPlay Android
 - [Traffic](#traffic)
 - [Example](#example)
 - [Possible problems and their solutions](#solutions)
-
-<a name="license"></a>License
------------------------------
 
 <a name="description-of-the-technology"></a>Description of the technology
 -------------------------------------------------------------------------
@@ -44,8 +40,8 @@ Next, you need to download the following library files.
 |:------------------------:|:-------------------:|:--------------------------------:|:-------:|:----------------------------------:|:----------------------------------:|:------:|:----:|
 |android-async-http        | 1.4.4               | [android-async-http-1.4.4.jar](https://github.com/loopj/android-async-http/raw/master/releases/android-async-http-1.4.4.jar) |    -    |      -                             |  -                                 |   -    |  -   |
 |autobahn-ws 	           | 0.5.0               | [autobahn-0.5.0.jar](https://autobahn.s3.amazonaws.com/android/autobahn-0.5.0.jar)           |    -    |      -                             |  -                                 |   -    |  -   |
-|libjingle_peerconnection  | 3.52                | [libjingle_peerconnection.jar]() |    -    | [libjingle_peerconnection_so.so]() | [libjingle_peerconnection_so.so]() |   -    |  -   |
-|android-flockplay 	       |   -                 | [android-flockplay.jar]()        |    -    |      -                             |  -                                 |   -    |  -   |
+|libjingle_peerconnection  | -                | [libjingle_peerconnection.jar](https://github.com/inventos/FlockPlay-android/blob/master/libs/android-flockplay.jar?raw=true) |    -    | [libjingle_peerconnection_so.so](https://github.com/inventos/FlockPlay-android/blob/master/libs/armeabi-v7a/libjingle_peerconnection_so.so?raw=true) | [libjingle_peerconnection_so.so](https://github.com/inventos/FlockPlay-android/blob/master/libs/x86/libjingle_peerconnection_so.so?raw=true) |   -    |  [libjingle_peerconnection_so.so](https://github.com/inventos/FlockPlay-android/blob/master/libs/arm64-v8a/libjingle_peerconnection_so.so?raw=true)   |
+|android-flockplay 	       |   -                 | [android-flockplay.jar](https://github.com/inventos/FlockPlay-android/blob/master/libs/android-flockplay.jar?raw=true)        |    -    |      -                             |  -                                 |   -    |  -   |
 
 Now add the JAR files to the _libs_ project and SO files in the folders _libs/armeabi-v7a_, _libs/x86_ and _libs/arm64-v8a_.
 
