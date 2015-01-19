@@ -1,0 +1,18 @@
+<resources>
+
+    <style name="PlayerTheme" parent="android:Theme.Holo">
+        <item name="android:actionBarStyle">@style/PlayerActionBar</item>
+        <item name="android:actionBarDivider">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@android:color/transparent</item>
+    </style>
+
+    <style name="PlayerActionBar" parent="@android:style/Widget.Holo.ActionBar.Solid">
+        <item name="android:titleTextStyle">@style/ActionBarTitleText</item>
+        <item name="android:background">@drawable/semi_transparent</item>
+    </style>
+
+    <style name="ActionBarTitleText" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+</resources>

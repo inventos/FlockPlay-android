@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/controller_button_height"
+    android:background="@drawable/semi_transparent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="0dip"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ImageButton
+            android:id="@+id/prev"
+            android:layout_width="@dimen/controller_button_width"
+            android:layout_height="@dimen/controller_button_height"
+            android:src="@drawable/ic_action_av_previous"
+            android:background="@drawable/player_control_button"
+            android:visibility="gone"/>
+
+        <ImageButton
+            android:id="@+id/next"
+            android:layout_width="@dimen/controller_button_width"
+            android:layout_height="@dimen/controller_button_height"
+            android:src="@drawable/ic_action_av_next"
+            android:background="@drawable/player_control_button"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:stretchColumns="3">
+
+        <TableRow>
+
+            <ImageButton
+                android:id="@+id/pause"
+                android:layout_width="@dimen/controller_button_width"
+                android:layout_height="@dimen/controller_button_height"
+                android:src="@drawable/ic_action_av_play"
+                android:background="@drawable/player_control_button" />
+
+            <ImageButton
+                android:id="@+id/rew"
+                android:layout_width="@dimen/controller_button_width"
+                android:layout_height="@dimen/controller_button_height"
+                android:src="@drawable/ic_action_av_rewind"
+                android:background="@drawable/player_control_button"
+                android:gravity="center"/>
+
+            <ImageButton
+                android:id="@+id/ffwd"
+                android:layout_width="@dimen/controller_button_width"
+                android:layout_height="@dimen/controller_button_height"
+                android:src="@drawable/ic_action_av_fast_forward"
+                android:background="@drawable/player_control_button"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:orientation="horizontal"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/time_current"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:text="00:00"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:layout_marginLeft="@dimen/controller_button_padding"/>
+
+                <SeekBar
+                    android:id="@+id/mediacontroller_progress"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:progressDrawable="@drawable/seekbar"
+                    android:maxHeight="3dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/controller_button_padding"
+                    android:layout_marginRight="@dimen/controller_button_padding"/>
+
+                <TextView
+                    android:id="@+id/time"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:text="00:00"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:layout_marginRight="@dimen/controller_button_padding"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>
