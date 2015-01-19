@@ -32,8 +32,8 @@ public class MainActivity extends Activity {
         mController.setMediaPlayer(mVideoView);
         mController.setOnControllerShowListener(controllerShowListener);
         Options options = new Options();
-        options.tag = "default";
-        options.key = "test_key";
+        options.tag = "github";
+        options.key = "demo";
         mProxyServer = new ProxyServer(options,this,abstractMediaPlayer);
         findViewById(R.id.frame).setOnTouchListener(controllerToggler);
     }
