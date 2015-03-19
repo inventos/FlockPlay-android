@@ -29,8 +29,6 @@ Before you use the library, make sure that you have the correct version of the c
 
 Before you use the library, make sure that you have the correct version of the compiler JAVA - 1.7. or higher.
 
-![android_java_version](https://peer-control.megacdn.ru/images/setup_android_java_version.png)
-
 <a name="setup"></a>Setup
 -------------------------
 Next, you need to download the following library files.
