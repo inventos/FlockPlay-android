@@ -32,21 +32,17 @@ public class MainActivity extends Activity {
         mController.setMediaPlayer(mVideoView);
         mController.setOnControllerShowListener(controllerShowListener);
         Options options = new Options();
-        options.tag = "github";
-        options.key = "demo";
+        options.tag = "default";
+        options.key = "test_key";
         mProxyServer = new ProxyServer(options,this,abstractMediaPlayer);
         findViewById(R.id.frame).setOnTouchListener(controllerToggler);
+        mProxyServer.open();
     }
 
     private final AbstractMediaPlayer abstractMediaPlayer = new AbstractMediaPlayer() {
         @Override
-        public int getCurrentPosition() {
+        public int getCurrentPositionMs() {
             return mVideoView != null ? mVideoView.getCurrentPosition() : 0;
-        }
-
-        @Override
-        public boolean isPlaying() {
-            return mVideoView != null && mVideoView.isPlaying();
         }
     };
 
@@ -94,14 +90,14 @@ public class MainActivity extends Activity {
     @Override
     public void onStart () {
         super.onStart();
-        if (mProxyServer.start(8089)) {
-            mVideoView.setVideoURI(mProxyServer.preparePlaylist("http://flockplay.com/test/playlist.m3u8"));
-        }
+        mProxyServer.resume();
+        mVideoView.setVideoURI(mProxyServer.preparePlaylist("http://flockplay.com/test/playlist.m3u8"));
+
     }
 
     @Override
     protected void onDestroy() {
-        mProxyServer.destroy(this);
+        mProxyServer.shutdown(this);
         super.onDestroy();
     }
 
