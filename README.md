@@ -19,15 +19,15 @@ FlockPlay technology for the Android platform is a proxy server and P2P module.
 <a name="requirements"></a>Requirements
 ---------------------------------------
 
-Before you use the library, make sure that you have the correct version of the compiler JAVA - 1.6. or higher.
+Before you use the library, make sure that you have the correct version of the compiler JAVA - 1.7. or higher.
 
 - The library has been developed for the platform Android 4.0 or higher.
-- Currently it supports processor architectures - armeabi-v7a (armv7), ia32 (x86) and arm64-v8a (armv8).
+- Currently it supports processor architectures - armeabi-v7a (armv7) and ia32 (x86).
 
 <a name="description-of-the-technology"></a>Version of the compiler
 -------------------------------------------------------------------
 
-Before you use the library, make sure that you have the correct version of the compiler JAVA - 1.6. or higher.
+Before you use the library, make sure that you have the correct version of the compiler JAVA - 1.7. or higher.
 
 ![android_java_version](https://peer-control.megacdn.ru/images/setup_android_java_version.png)
 
@@ -38,12 +38,12 @@ Next, you need to download the following library files.
 
 | Name                     | Recommended version | JAR                              | armeabi | armeabi-v7a                        | x86                                | x86_64 | arm64-v8a |
 |:------------------------:|:-------------------:|:--------------------------------:|:-------:|:----------------------------------:|:----------------------------------:|:------:|:----:|
-|android-async-http        | 1.4.4               | [android-async-http-1.4.4.jar](https://github.com/loopj/android-async-http/raw/master/releases/android-async-http-1.4.4.jar) |    -    |      -                             |  -                                 |   -    |  -   |
-|autobahn-ws 	           | 0.5.0               | [autobahn-0.5.0.jar](https://autobahn.s3.amazonaws.com/android/autobahn-0.5.0.jar)           |    -    |      -                             |  -                                 |   -    |  -   |
-|libjingle_peerconnection  | -                | [libjingle_peerconnection.jar](https://github.com/inventos/FlockPlay-android/blob/master/libs/android-flockplay.jar?raw=true) |    -    | [libjingle_peerconnection_so.so](https://github.com/inventos/FlockPlay-android/blob/master/libs/armeabi-v7a/libjingle_peerconnection_so.so?raw=true) | [libjingle_peerconnection_so.so](https://github.com/inventos/FlockPlay-android/blob/master/libs/x86/libjingle_peerconnection_so.so?raw=true) |   -    |  [libjingle_peerconnection_so.so](https://github.com/inventos/FlockPlay-android/blob/master/libs/arm64-v8a/libjingle_peerconnection_so.so?raw=true)   |
-|android-flockplay 	       |   -                 | [android-flockplay.jar](https://github.com/inventos/FlockPlay-android/blob/master/libs/android-flockplay.jar?raw=true)        |    -    |      -                             |  -                                 |   -    |  -   |
+|android-async-http        | 1.4.6               | [android-async-http-1.4.6.jar](https://github.com/loopj/android-async-http/raw/master/releases/android-async-http-1.4.6.jar) |    -    |      -                             |  -                                 |   -    |  -   |
+|tyrus-standalone-client 	           | 1.10               | [tyrus-standalone-client-1.10.jar](http://repo1.maven.org/maven2/org/glassfish/tyrus/bundles/tyrus-standalone-client/1.10/tyrus-standalone-client-1.10.jar)           |    -    |      -                             |  -                                 |   -    |  -   |
+|libjingle_peerconnection  | -                | [libjingle_peerconnection.jar](https://github.com/inventos/FlockPlay-android/blob/master/libs/android-flockplay.jar?raw=true) |    -    | [libjingle_peerconnection_so.so](https://github.com/inventos/FlockPlay-android/blob/master/libs/armeabi-v7a/libjingle_peerconnection_so.so?raw=true) | [libjingle_peerconnection_so.so](https://github.com/inventos/FlockPlay-android/blob/master/libs/x86/libjingle_peerconnection_so.so?raw=true) |   -    |  -  |
+|android-flockplay 	       |   2                 | [android-flockplay-2.jar](https://github.com/inventos/FlockPlay-android/blob/master/libs/android-flockplay-2.jar?raw=true)        |    -    |      -                             |  -                                 |   -    |  -   |
 
-Now add the JAR files to the _libs_ project and SO files in the folders _libs/armeabi-v7a_, _libs/x86_ and _libs/arm64-v8a_.
+Now add the JAR files to the _libs_ project and SO files in the folders _libs/armeabi-v7a_ and _libs/x86_.
 
 Next, add files to project build path.
 
@@ -78,14 +78,13 @@ Next you have to implement interface and send object to server constructor.
 
 ```java
 public interface AbstractMediaPlayer {
-    public int getCurrentPosition ();
-    public boolean isPlaying();
+    public int getCurrentPositionMs ();
 }
 ```
 Where:
 
 ```java
-public int getCurrentPosition();
+public int getCurrentPositionMs();
 ```
 
 returns current playback position in milliseconds.
@@ -102,12 +101,8 @@ Example could look like this:
 VideoView player = ...;
 AbstractMediaPlayer abstractMediaPlayer = new AbstractMediaPlayer() {
     @Override
-    public int getCurrentPosition() {
+    public int getCurrentPositionMs() {
         return player.getCurrentPosition();
-    }
-    @Override
-    public boolean isPlaying() {
-        return player.isPlaying();
     }
 };
 ProxyServer server = new ProxyServer(ops,getContext(),abstractMediaPlayer);
@@ -116,10 +111,9 @@ ProxyServer server = new ProxyServer(ops,getContext(),abstractMediaPlayer);
 After creating the server does not automatically start. Therefore, run it by: 
 
 ```java
-public boolean start (int p)
+public boolean open ()
 ```
 
-The only argument is the port number.
 If the call returns _false_ - then launch failed.
 Now the server is running is the last step - prepare URL playlist.
 For this purpose the method: 
@@ -133,7 +127,7 @@ The resulting object is passed to the video player.
 In order to permanently shut down the server, use this method: 
 
 ```java
-public void destroy (android.content.Context c)
+public void shutdown (android.content.Context c)
 ```
 
 <a name="traffic"></a>Traffic
@@ -171,16 +165,12 @@ public class ExampleActivity extends Activity {
         options.key = "demo";
         AbstractMediaPlayer abstractMediaPlayer = new AbstractMediaPlayer() {
             @Override
-            public int getCurrentPosition() {
+            public int getCurrentPositionMs() {
                 return mVideoView.getCurrentPosition();
             }
-
-            @Override
-            public boolean isPlaying() {
-                return mVideoView.isPlaying();
-            }
         };
-        mProxyServer = new ProxyServer(options,this,abstractMediaPlayer);        
+        mProxyServer = new ProxyServer(options,this,abstractMediaPlayer);
+        mProxyServer.open()
     }
 
     @Override    
@@ -192,16 +182,15 @@ public class ExampleActivity extends Activity {
     @Override
     public void onStart () {
         super.onStart();
-        if (mProxyServer.start(8089)) {
-            mVideoView.setVideoURI(mProxyServer.preparePlaylist("http://flockplay.com/test/playlist.m3u8"));
-            mVideoView.requestFocus();
-            mVideoView.start();
-        }        
+        mProxyServer.resume();
+        mVideoView.setVideoURI(mProxyServer.preparePlaylist("http://flockplay.com/test/playlist.m3u8"));
+        mVideoView.requestFocus();
+        mVideoView.start();
     }
 
     @Override
     protected void onDestroy() {
-        mProxyServer.destroy(this);
+        mProxyServer.shutdown(this);
         super.onDestroy();
     }
 
